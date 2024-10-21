@@ -110,9 +110,21 @@ public class ChambreTest {
 
     @Test
     void testGetById() throws Exception {
-        // Mock the service layer to return a specific Piste
-        Chambre c = new Chambre();
-        c.setIdChambre(1L);
+        // Act: Perform the GET request
+        MvcResult result = mockMvc.perform(get("/chambre/retrieve-all-chambres")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = result.getResponse().getContentAsString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Chambre> retrievedChambres = objectMapper.readValue(jsonResponse,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Chambre.class));
+
+
+        Chambre c =retrievedChambres.get(0); // Mock the service layer to return a specific Piste
+
+
 
 
         when(chambreRestController.retrieveChambre(c.getIdChambre())).thenReturn(c);
@@ -124,21 +136,31 @@ public class ChambreTest {
     }
     @Test
     void testDeleteById() throws Exception {
-        Chambre c =new Chambre();
-        List<Chambre> pistes = new ArrayList<>();
+        // Act: Perform the GET request
+        MvcResult result = mockMvc.perform(get("/chambre/retrieve-all-chambres")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
 
-        Chambre p =ChambreServices.retrieveChambre(12L);
+        String jsonResponse = result.getResponse().getContentAsString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Chambre> retrievedChambres = objectMapper.readValue(jsonResponse,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Chambre.class));
+
+
+        Chambre c =retrievedChambres.get(0);
+
 
         //when(ChambreServices.retrieveAllPistes()).thenReturn();
        // pistes = ChambreServices.retrieveAllPistes();
-        System.out.println("size liste des pistes : " + p.getNumeroChambre());
+        System.out.println("size liste des pistes : " + c.getNumeroChambre());
 
         // Perform the DELETE request with path variable
-        /*mockMvc.perform(delete("/piste/delete/"+ p.getNumPiste())
+        mockMvc.perform(delete("/chambre/remove-chambre/"+ c.getIdChambre())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         // Verify that the service method was called
-*/
+
     }
 
 }
