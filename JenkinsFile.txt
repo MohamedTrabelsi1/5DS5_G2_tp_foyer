@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'
+    }
+
+    stages {
+        stage('GIT') {
+            steps {
+                git branch: 'MehdiBedoui_5DS5_G2',
+                    url: 'https://github.com/MohamedTrabelsi1/5DS5_G2_tp_foyer'
+            }
+        }
+
+        stage('Compile Stage') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+    }
+}
