@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+ tools {
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'
+    }
+    
+    stages {
+        stage('Git') {
+            steps {
+                echo 'Recup Code de Git : '
+                git branch: 'AhmedSta_5DS5_G2',
+                    url: 'https://github.com/MohamedTrabelsi1/5DS5_G2_tp_foyer.git'
+            }
+        }
+   
+   stage('clean and compile stage') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        
+
+        stage('Build & Test') {
+            steps {
+                echo 'Exécution des Tests et génération des rapports JaCoCo : '
+                // Run tests and generate JaCoCo reports
+                sh 'mvn clean test'
+            }
+        }
+
+         stage('SonarQube') {
+            steps {
+                echo 'Analyse de la Qualité du Code : '
+                withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_TOKEN')]) {
+                sh "mvn sonar:sonar -Dsonar.login=${SONAR_TOKEN} -Dsonar.jacoco.reportPaths=target/jacoco.exec"
+                }
+            }
+        }
+
+    }
+}
