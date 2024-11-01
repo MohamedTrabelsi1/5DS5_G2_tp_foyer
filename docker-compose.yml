@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   tp-foyer-app:
-    image: mohamedtrabelsi01/devops:latest
+    image: mohamedtrabelsi01/mohamedtrabelsi_g2_tpfoyer:latest
     ports:
       - "8089:8089"
     environment:
@@ -22,7 +22,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
     ports:
-      - "3307:3307"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
