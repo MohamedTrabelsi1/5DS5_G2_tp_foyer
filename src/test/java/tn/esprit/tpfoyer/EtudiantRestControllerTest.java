@@ -1,15 +1,17 @@
-package tn.esprit.tpfoyer.control;
+package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.service.IEtudiantService;
-
+import tn.esprit.tpfoyer.control.EtudiantRestController;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,12 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(EtudiantRestController.class)
 public class EtudiantRestControllerTest {
 
-    @Mock
+    @MockBean
     private IEtudiantService etudiantService;
 
     @InjectMocks
     private EtudiantRestController etudiantRestController;
 
+    @Autowired
     private MockMvc mockMvc;
 
     public EtudiantRestControllerTest() {
