@@ -30,5 +30,13 @@ pipeline {
                         sh 'mvn test'
                     }
                 }
+                
+       stage('SonarQue') {
+            steps {
+                echo 'Analyse de la Qualité du Code : ';
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#';
+            }
+        }
+
 }
 }
