@@ -32,7 +32,7 @@ class EtudiantRestControllerTest {
         Etudiant etudiant = new Etudiant(1L, "Dupont", "Jean",  new Date(),12345678L, null);
         when(etudiantServices.addEtudiant(any(Etudiant.class))).thenReturn(etudiant);
 
-        mockMvc.perform(post("/etudiant/add")
+        mockMvc.perform(post("/etudiant/add-etudiant")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"nomEtudiant\":\"Dupont\",\"prenomEtudiant\":\"Jean\"}"))
                 .andExpect(status().isOk())
@@ -45,7 +45,7 @@ class EtudiantRestControllerTest {
         Etudiant etudiant = new Etudiant(1L, "Alice", "Smith", null, 99,null);
         when(etudiantServices.retrieveAllEtudiants()).thenReturn(Collections.singletonList(etudiant));
 
-        mockMvc.perform(get("/etudiant/all"))
+        mockMvc.perform(get("/etudiant/retrieve-all-etudiants"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].firstName").value(etudiant.getPrenomEtudiant()))
                 .andExpect(jsonPath("$[0].lastName").value(etudiant.getNomEtudiant()));
@@ -56,7 +56,7 @@ class EtudiantRestControllerTest {
         Etudiant etudiant = new Etudiant(109, "Alice", "Smith", null, 88888888, null);
         when(etudiantServices.modifyEtudiant(any(Etudiant.class))).thenReturn(etudiant);
 
-        mockMvc.perform(put("/etudiant/update")
+        mockMvc.perform(put("/etudiant/modify-etudiant")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{,\"prenomEtudiant\":\"Alice\",\"nomEtudiant\":\"Smith\"}")) // updated to match entity fields
                 .andExpect(status().isOk())
@@ -69,7 +69,7 @@ class EtudiantRestControllerTest {
         Etudiant etudiant = new Etudiant(1L, "Alice", "Smith", null, 99,null);
         when(etudiantServices.retrieveEtudiant(Long.valueOf(1L))).thenReturn(etudiant);
 
-        mockMvc.perform(get("/etudiant/get/1"))
+        mockMvc.perform(get("/etudiant/retrieve-etudiant/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value(etudiant.getPrenomEtudiant()))
                 .andExpect(jsonPath("$.lastName").value(etudiant.getNomEtudiant()));
