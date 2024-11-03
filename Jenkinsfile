@@ -25,36 +25,9 @@ pipeline {
                 sh 'mvn package -DskipTests'
             }
         }
-        
-        stage('Construction Image Docker') {
-            steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                }
-            }
-        }
-        
-        stage('Push Image Docker') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
-                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push("latest")
+        stage('test') {
+                    steps {
+                        sh 'mvn test'
                     }
                 }
-            }
-        }
-        
-        stage('Déploiement') {
-            steps {
-                echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
-            }
-        }
-    }
-    
-    post {
-        always {
-            sh 'docker logout'
-        }
-    }
 }
