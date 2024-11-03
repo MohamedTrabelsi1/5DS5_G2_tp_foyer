@@ -16,7 +16,7 @@ pipeline {
 
         stage('Nettoyage') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean package'
             }
         }
     stage('compiler') {
@@ -30,8 +30,13 @@ pipeline {
                         sh 'mvn test'
                     }
                 }
-                
-       stage('SonarQue') {
+       stage('nexus') {
+            steps {
+                echo 'build: ';
+                sh 'mvn clean deploy -DskipTests';
+            }
+        }    
+       stage('SonarQube') {
             steps {
                 echo 'Analyse de la Qualité du Code : ';
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#';
