@@ -13,13 +13,13 @@ pipeline {
                 url: 'https://github.com/MohamedTrabelsi1/5DS5_G2_tp_foyer'
             }
         }
-        
+
         stage('Nettoyage') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean'
             }
         }
-stage('compiler') {
+    stage('compiler') {
             steps {
                 sh 'mvn compile'
             }
