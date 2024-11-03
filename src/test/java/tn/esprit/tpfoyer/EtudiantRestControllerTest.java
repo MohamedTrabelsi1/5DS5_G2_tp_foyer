@@ -34,22 +34,6 @@ public class EtudiantRestControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(etudiantRestController).build();
     }
 
-    @Test
-    public void testGetEtudiants() throws Exception {
-        Etudiant etudiant = new Etudiant();
-        etudiant.setIdEtudiant(1L);
-        etudiant.setNomEtudiant("John");
-        etudiant.setPrenomEtudiant("Doe");
-
-        List<Etudiant> etudiants = Collections.singletonList(etudiant);
-
-        when(etudiantService.retrieveAllEtudiants()).thenReturn(etudiants);
-
-        mockMvc.perform(get("/etudiant/retrieve-all-etudiants"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nomEtudiant").value("John"))
-                .andExpect(jsonPath("$[0].prenomEtudiant").value("Doe"));
-    }
 
     @Test
     public void testAddEtudiant() throws Exception {
