@@ -16,7 +16,12 @@ pipeline {
         
         stage('Nettoyage') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean'
+            }
+        }
+stage('compiler') {
+            steps {
+                sh 'mvn compile'
             }
         }
 
