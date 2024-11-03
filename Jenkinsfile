@@ -16,7 +16,7 @@ pipeline {
         
         stage('Nettoyage') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean package'
             }
         }
 stage('compiler') {
