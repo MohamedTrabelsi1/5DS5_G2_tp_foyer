@@ -8,21 +8,9 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Getterpackage tn.esprit.tpfoyer.entity;
-
-import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import java.util.Date;
-import java.util.Set;
-
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
-
-
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -39,9 +27,4 @@ public class Etudiant {
 
     @ManyToMany(mappedBy = "etudiants")
     Set<Reservation> reservations;
-
 }
-
-
-
-
