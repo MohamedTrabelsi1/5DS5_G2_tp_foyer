@@ -10,8 +10,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Etudiant {
@@ -19,6 +17,27 @@ public class Etudiant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idEtudiant;
+
+    String nomEtudiant;
+    String prenomEtudiant;
+    long cinEtudiant;
+    Date dateNaissance;
+
+    public Etudiant(long idEtudiant, String nomEtudiant, String prenomEtudiant, long cinEtudiant, Date dateNaissance, Set<Reservation> reservations) {
+        this.idEtudiant = idEtudiant;
+        this.nomEtudiant = nomEtudiant;
+        this.prenomEtudiant = prenomEtudiant;
+        this.cinEtudiant = cinEtudiant;
+        this.dateNaissance = dateNaissance;
+        this.reservations = reservations;
+    }
+
+    public Etudiant() {
+
+    }
+
+    @ManyToMany(mappedBy = "etudiants")
+    Set<Reservation> reservations;
 
     public long getIdEtudiant() {
         return idEtudiant;
@@ -44,20 +63,20 @@ public class Etudiant {
         this.prenomEtudiant = prenomEtudiant;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
     public long getCinEtudiant() {
         return cinEtudiant;
     }
 
     public void setCinEtudiant(long cinEtudiant) {
         this.cinEtudiant = cinEtudiant;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
     public Set<Reservation> getReservations() {
@@ -67,22 +86,4 @@ public class Etudiant {
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
-
-    String nomEtudiant;
-    String prenomEtudiant;
-    long cinEtudiant;
-    Date dateNaissance;
-
-    public Etudiant(long idEtudiant, String nomEtudiant, String prenomEtudiant, Date dateNaissance, long cinEtudiant, Set<Reservation> reservations) {
-        this.idEtudiant = idEtudiant;
-        this.nomEtudiant = nomEtudiant;
-        this.prenomEtudiant = prenomEtudiant;
-        this.dateNaissance = dateNaissance;
-        this.cinEtudiant = cinEtudiant;
-        this.reservations = reservations;
-    }
-
-    @ManyToMany(mappedBy = "etudiants")
-    Set<Reservation> reservations;
-
 }
