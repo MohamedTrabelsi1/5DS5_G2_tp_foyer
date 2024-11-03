@@ -29,7 +29,7 @@ class EtudiantRestControllerTest {
 
     @Test
     void testAddEtudiant() throws Exception {
-        Etudiant etudiant = new Etudiant(1L, "Dupont", "Jean",  new Date(),12345678L, null);
+        Etudiant etudiant = new Etudiant(1L, "Dupont", "Jean",  null,12345678L, null);
         when(etudiantServices.addEtudiant(any(Etudiant.class))).thenReturn(etudiant);
 
         mockMvc.perform(post("/etudiant/add-etudiant")
