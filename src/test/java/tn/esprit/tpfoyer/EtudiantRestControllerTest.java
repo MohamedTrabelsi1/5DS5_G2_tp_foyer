@@ -58,7 +58,7 @@ class EtudiantRestControllerTest {
 
         mockMvc.perform(put("/etudiant/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"idEtudiant\":1,\"prenomEtudiant\":\"Alice\",\"nomEtudiant\":\"Smith\"}")) // updated to match entity fields
+                        .content("{,\"prenomEtudiant\":\"Alice\",\"nomEtudiant\":\"Smith\"}")) // updated to match entity fields
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.prenomEtudiant").value(etudiant.getPrenomEtudiant()))
                 .andExpect(jsonPath("$.nomEtudiant").value(etudiant.getNomEtudiant()));
