@@ -47,8 +47,8 @@ class EtudiantRestControllerTest {
 
         mockMvc.perform(get("/etudiant/retrieve-all-etudiants"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].firstName").value(etudiant.getPrenomEtudiant()))
-                .andExpect(jsonPath("$[0].lastName").value(etudiant.getNomEtudiant()));
+                .andExpect(jsonPath("$[0].nomEtudiant").value(etudiant.getPrenomEtudiant()))
+                .andExpect(jsonPath("$[0].nomEtudiant").value(etudiant.getNomEtudiant()));
     }
 
     @Test
@@ -71,7 +71,7 @@ class EtudiantRestControllerTest {
 
         mockMvc.perform(get("/etudiant/retrieve-etudiant/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value(etudiant.getPrenomEtudiant()))
-                .andExpect(jsonPath("$.lastName").value(etudiant.getNomEtudiant()));
+                .andExpect(jsonPath("$.prenomEtudiant").value(etudiant.getPrenomEtudiant()))
+                .andExpect(jsonPath("$.nomEtudiant").value(etudiant.getNomEtudiant()));
     }
 }
