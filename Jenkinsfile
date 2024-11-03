@@ -16,15 +16,10 @@ pipeline {
         
         stage('Nettoyage') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean install'
             }
         }
-        
-        stage('Construction') {
-            steps {
-                sh 'mvn package -DskipTests'
-            }
-        }
+
         stage('test') {
                     steps {
                         sh 'mvn test'
