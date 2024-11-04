@@ -16,6 +16,6 @@ WORKDIR /app
 
 COPY ./target/tp-foyer-5.0.0.jar /app/tp-foyer-5.0.0.jar
 
-EXPOSE 8082
+EXPOSE 8080
 
 CMD ["java", "-jar", "/app/tp-foyer-5.0.0.jar"]
