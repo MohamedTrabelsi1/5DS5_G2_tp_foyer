@@ -19,29 +19,39 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-    stage('compiler') {
+
+        stage('compiler') {
             steps {
                 sh 'mvn compile'
             }
         }
 
         stage('test') {
-                    steps {
-                        sh 'mvn test'
-                    }
-                }
-       stage('nexus') {
             steps {
-                echo 'build: ';
-                sh 'mvn clean deploy -DskipTests';
+                sh 'mvn test'
             }
-        }    
-       stage('SonarQube') {
+        }
+        
+        stage('nexus') {
             steps {
-                echo 'Analyse de la Qualité du Code : ';
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#';
+                echo 'build: '
+                sh 'mvn clean deploy -DskipTests'
+            }
+        }
+        
+        stage('SonarQube') {
+            steps {
+                echo 'Analyse de la Qualité du Code : '
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#'
             }
         }
 
+        stage('Docker Compose') {
+            steps {
+                echo 'Running Docker Compose'
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
 }
-}
+
