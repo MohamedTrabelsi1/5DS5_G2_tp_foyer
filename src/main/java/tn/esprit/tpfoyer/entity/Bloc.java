@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
 public class Bloc {
 
     @Id
@@ -33,5 +34,7 @@ public class Bloc {
     @ToString.Exclude
     Set<Chambre> chambres = new HashSet<Chambre>();
 
+    public Bloc(long l, String blocA, long l1, Object o) {
+    }
 }
 
