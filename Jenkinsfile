@@ -49,12 +49,13 @@ pipeline {
                 }
             }
         }
-	stage('Push Docker Image to Docker Hub') {
+
+        stage('Push Docker Image to Docker Hub') {  // Corrected line
             steps {
-		sh 'docker push mehdibedoui/foyerspring'
-                }
+                sh 'docker push mehdibedoui/foyerspring'
             }
         }
+
         stage('Docker Compose Down') {
             steps {
                 dir('firstpipeline') {  
@@ -80,3 +81,4 @@ pipeline {
         // }
     }
 }
+
