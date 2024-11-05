@@ -78,7 +78,7 @@ pipeline {
                 }
             }
         }
-
+	// stage
         // stage('Final Docker Compose Down') { // Only include if shutdown is desired at the end
         //     steps {
         //         dir('firstpipeline') {  
