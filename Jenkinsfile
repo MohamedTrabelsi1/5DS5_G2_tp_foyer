@@ -50,11 +50,14 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {  // Corrected line
-            steps {
-                sh 'docker push mehdibedoui/foyerspring'
-            }
-        }
+        stage('Push Docker Image to Docker Hub') {
+	    steps {
+		withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+		    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+		    sh 'docker push mehdibedoui/foyerspring:latest'
+		}
+	    }
+	}
 
         stage('Docker Compose Down') {
             steps {
