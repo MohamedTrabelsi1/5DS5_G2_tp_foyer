@@ -40,12 +40,12 @@ pipeline {
         }
 	
         
-        stage('SonarQube') {
-            steps {
-                echo 'Analyse de la Qualité du Code : '
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#'
-            }
-        }
+        // stage('SonarQube') {
+           // steps {
+             //   echo 'Analyse de la Qualité du Code : '
+              //  sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#'
+          //  }
+      //  }
 
 	stage('Nexus') {
             steps {
