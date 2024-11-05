@@ -39,12 +39,6 @@ pipeline {
             }
         }
 	
-	stage('Nexus') {
-            steps {
-                echo 'build: '
-                sh 'mvn clean deploy -DskipTests'
-            }
-        }
         
         stage('SonarQube') {
             steps {
@@ -53,6 +47,13 @@ pipeline {
             }
         }
 
+	stage('Nexus') {
+            steps {
+                echo 'build: '
+                sh 'mvn clean deploy -DskipTests'
+            }
+        }
+        
         stage('Remove Old Docker Image') {
             steps {
                 script {
