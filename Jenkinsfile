@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-	stage('Push Docker Image to Docker Hub) {
+	stage('Push Docker Image to Docker Hub') {
             steps {
 		sh 'docker push mehdibedoui/foyerspring'
                 }
