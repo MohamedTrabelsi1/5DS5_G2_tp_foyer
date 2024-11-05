@@ -70,14 +70,14 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {
-	    steps {
-		withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-		    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-		    sh 'docker push mehdibedoui/foyerspring:latest'
-		}
-	    }
-	}
+      //  stage('push docker image to docker hub') {
+	//    steps {
+	//	withcredentials([usernamepassword(credentialsid: 'docker-hub-credentials', usernamevariable: 'docker_username', passwordvariable: 'docker_password')]) {
+	//	    sh 'echo "$docker_password" | docker login -u "$docker_username" --password-stdin'
+	//	    sh 'docker push mehdibedoui/foyerspring:latest'
+	//	}
+	//    }
+//	}
 
         stage('Docker Compose Down') {
             steps {
