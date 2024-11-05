@@ -44,14 +44,50 @@ public class SubscriptionServiceImplMock {
         {
             add(new Subscription((long)2, startDate, endDate, (float)22.4, TypeSubscription.ANNUAL));
             add(new Subscription((long)3, startDate, endDate, (float)14.5, TypeSubscription.ANNUAL));
+            add(new Subscription((long)4, startDate, endDate, (float)17.5, TypeSubscription.ANNUAL));
         }
     };
 
 
     @Test
-    public void testRetrieveBloc() {
+    public void testRetrieveSubscription() {
         Mockito.when(SubscriptionRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(subscription));
         Subscription subscription1 = SubscriptionService.retrieveSubscriptionById((long)1);
         Assertions.assertNotNull(subscription1);
+        Mockito.verify(SubscriptionRepository).findById(Mockito.anyLong());
     }
+
+    @Test
+    public void testAddSubscription() {
+        Mockito.when(SubscriptionRepository.save(Mockito.any(Subscription.class))).thenReturn(subscription);
+
+        Subscription addedSubscription = SubscriptionService.addSubscription(subscription);
+
+        Assertions.assertNotNull(addedSubscription);
+        Assertions.assertEquals(subscription, addedSubscription);
+        Mockito.verify(SubscriptionRepository).save(subscription);
+    }
+
+    @Test
+    public void testUpdateSubscription() {
+        Mockito.when(SubscriptionRepository.save(Mockito.any(Subscription.class))).thenReturn(subscription);
+
+        Subscription updatedSubscription = SubscriptionService.updateSubscription(subscription);
+
+        Assertions.assertNotNull(updatedSubscription);
+        Assertions.assertEquals(subscription, updatedSubscription);
+        Mockito.verify(SubscriptionRepository).save(subscription);
+    }
+
+    @Test
+    public void testRetrieveSubscriptionNotFound() {
+        Mockito.when(SubscriptionRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+
+        Subscription subscriptionResult = SubscriptionService.retrieveSubscriptionById(999L);
+
+        Assertions.assertNull(subscriptionResult);
+        Mockito.verify(SubscriptionRepository).findById(999L);
+    }
+
+    
 }
