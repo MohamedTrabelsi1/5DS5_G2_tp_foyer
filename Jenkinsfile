@@ -59,7 +59,11 @@ pipeline {
                 }
             }
         }
-        
+        stage('stoping docker compose') {
+            steps {
+                sh 'docker compose down'
+            }
+        }
         stage('Running docker compose') {
             steps {
                 sh 'docker compose up -d'
