@@ -40,19 +40,19 @@ pipeline {
         }
 	
         
-        // stage('SonarQube') {
-           // steps {
-             //   echo 'Analyse de la Qualité du Code : '
-              //  sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#'
-          //  }
-      //  }
-
-	stage('Nexus') {
+        stage('SonarQube') {
             steps {
-                echo 'build: '
-                sh 'mvn clean deploy -DskipTests'
+                echo 'Analyse de la Qualité du Code : '
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Sonarqube13#'
             }
         }
+
+	//stage('Nexus') {
+          //  steps {
+            //    echo 'build: '
+              //  sh 'mvn clean deploy -DskipTests'
+           // }
+      //  }
         
         stage('Remove Old Docker Image') {
             steps {
