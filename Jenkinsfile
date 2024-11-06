@@ -41,7 +41,7 @@ pipeline {
         stage('Remove Old Docker Image') {
             steps {
                 script {
-                    sh 'docker rmi -f tpfoyer:latest -f Dockerfile ./ || true' // `-f` forces removal, and `|| true` ignores errors
+                    sh 'docker rmi -f akremzaghdoudi/tpfoyer -f Dockerfile ./ || true' // `-f` forces removal, and `|| true` ignores errors
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 echo 'Building Docker image'
                 sh 'mvn clean install'
-                sh 'docker build -t tpfoyer:latest -f Dockerfile ./'
+                sh 'docker build -t akremzaghdoudi/tpfoyer -f Dockerfile ./'
                 echo "Docker image tpfoyer:latest built successfully"
             }
         }
