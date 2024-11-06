@@ -18,6 +18,12 @@ pipeline {
             }
         }
 
+        stage('Maven install') {
+            steps {
+                echo 'Nettoyage du Projet:'
+                sh 'mvn install'
+            }
+        }
         stage('Maven Clean') {
             steps {
                 echo 'Nettoyage du Projet:'
