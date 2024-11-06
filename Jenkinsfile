@@ -38,7 +38,13 @@ pipeline {
                 sh 'mvn clean deploy -Dusername=admin -Dpassword=nexus -DskipTests'
             }
         }
-        
+        stage('Remove Old Docker Image') {
+            steps {
+                script {
+                    sh 'docker rmi -f tpfoyer:latest -f Dockerfile ./ || true' // `-f` forces removal, and `|| true` ignores errors
+                }
+            }
+        }
         
         stage('Build Docker Image') {
             steps {
