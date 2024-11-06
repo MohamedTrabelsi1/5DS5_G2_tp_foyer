@@ -78,6 +78,8 @@ class FoyerServiceImplTest {
     void testRemoveFoyer() {
         Long foyerId = 1L;
 
+
+
         foyerService.removeFoyer(foyerId);
 
         verify(foyerRepository, times(1)).deleteById(foyerId);
