@@ -100,6 +100,14 @@ pipeline {
                 }
             }
         }
+        stage('Promethus & Grafana') {
+            steps {
+                    script {
+                       sh 'docker start prometheus'
+                       sh 'docker start grafana'
+                    }
+                }
+            }
 	// stage
         // stage('Final Docker Compose Down') { // Only include if shutdown is desired at the end
         //     steps {
