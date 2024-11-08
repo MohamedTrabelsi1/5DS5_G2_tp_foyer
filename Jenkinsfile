@@ -67,7 +67,7 @@ pipeline {
                 }
             }
         }
-
+//
         stage('Build Docker Image') {
             steps {
                 script {
@@ -104,7 +104,7 @@ pipeline {
             steps {
                     script {
                        sh 'docker start prometheus'
-                       sh 'docker start grafana'
+                       //sh 'docker start grafana'
                     }
                 }
             }
